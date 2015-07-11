@@ -12,6 +12,25 @@
      I = imread ("data/scorpion-lapse/scorpion_lapse_1.png");
 
 
+
+    baz = rgb2gray(img)
+    quux =	img_gld_gs = reinterpret(Uint8,data(baz))
+
+    zotrlogimage = convert(Image, zotrlog)
+
++ Trying out https://www.juliabox.org/
+   seems to not solve anything not already solved, and the other way round.
+http://timholy.github.io/Images.jl/
+https://github.com/timholy/Images.jl
+
+
+Need to concoct a set of experiments that will take me to the level where I can actually start working on something interesting.
+
+
+
+  + https://github.com/timholy/Images.jl
+
+
 + Couldn't find a way to display images
      
 
