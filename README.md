@@ -18,3 +18,7 @@ For now I have just added a data set with some pictures with various
 focus planes.  The series is called "scorpion-lapse" since it is a
 time series of pictures of a book scorpion.
 
+All of the software here will be open sourced, either Apache 2 or
+GPL 3. Haven't really decieded yet.  The time series is Apache 2 licensed
+(by me, I took the pictures).
+
