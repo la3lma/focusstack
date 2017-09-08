@@ -25,6 +25,10 @@ img = imread("data/scorpion-lapse/scorpion_lapse_1.png")
 #    value, put that value into a separate image.  This image will now
 #    represent a "height matrix" into the focus-layer space.  It can
 #    be interpreted as a conventional height matrix just for fun.
+# 4.1 This algorithm could be extended into generating a 3D density
+#     map generating algorithm, for picking out the sharp parts of the
+#     images, assuming that these will outline actual features in a 3D
+#     structure.
 
 # 5. Generate a "focus stacked image" where original pixels are
 #    collected, using the index picture to pick the pixel from the
