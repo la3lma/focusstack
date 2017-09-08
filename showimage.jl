@@ -1,15 +1,38 @@
 using ImageView
 using Images
+using FileIO
+
+# Run include("showimage.jl")
 
 # 1. Read an image (could be replaced by one of the
 # sample images)
-img = imread("data/scorpion-lapse/scorpion_lapse_1.png")
+
+# Test image
+using TestImages
+img = testimage("mandrill")
+# img = load("data/scorpion-lapse/scorpion_lapse_1.png")
+#imshow(img)
 
 # 2. Block algorithm: Make an algorithm that will pick out a block
 #    centered around a pixel coordinate, do a calculation on that
 #    block, and put the result into a matrix that has the size of the
 #    image (could/should be interpreted as an image to evaluate
 #    reasonableness).  Be able to adjust block size.
+
+(ydim, xdim) = size(img)
+blocksize=5 # not all numbers works, that's bad.
+count=0
+xlim=trunc(Int, (round(xdim/blocksize)*blocksize))
+ylim=trunc(Int, (round(ydim/blocksize)*blocksize))
+for y in 1:blocksize:ylim, x in 1:blocksize:xlim
+    # Maybe use  views instead? S2 = view(A, 5, :, 2:6)
+    segment = img[y:y+blocksize, x:x+blocksize]
+    count = count + 1
+end
+
+print("Number of segments in image  = $count\n")
+
+
 
 # 2.1 Make a sharpness estimator (based on the paper refered to
 #     elsewhere)
@@ -35,3 +58,5 @@ img = imread("data/scorpion-lapse/scorpion_lapse_1.png")
 #    sharpest image generating a "focused stacked" picture that
 #    usually will be sharper than any of the picures being input
 #    into the stacking algorithm.
+
+typeof(img)
