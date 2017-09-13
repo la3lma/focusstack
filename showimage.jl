@@ -1,6 +1,7 @@
 using ImageView
 using Images
 using FileIO
+using Colors
 
 # Run include("showimage.jl")
 
@@ -9,8 +10,16 @@ using FileIO
 
 # Test image
 using TestImages
-img = testimage("mandrill")
-# img = load("data/scorpion-lapse/scorpion_lapse_1.png")
+#img = load("data/scorpion-lapse/scorpion_lapse_1.png")
+#img = testimage("mandrill")
+img=testimage("lena")
+imgg = Gray.(img)
+fftimg = fft(channelview(imgg))
+cimg = channelview(imgg)
+
+zor = log.(abs.(fft(cimg)))
+normfft = 255 .*(zor./maximum(zor))
+
 #imshow(img)
 
 # 2. Block algorithm: Make an algorithm that will pick out a block
@@ -20,18 +29,43 @@ img = testimage("mandrill")
 #    reasonableness).  Be able to adjust block size.
 
 (ydim, xdim) = size(img)
-blocksize=5 # not all numbers works, that's bad.
+blocksize=2 # not all numbers works, that's bad.
 count=0
-xlim=trunc(Int, (round(xdim/blocksize)*blocksize))
-ylim=trunc(Int, (round(ydim/blocksize)*blocksize))
+xlim=trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))
+ylim=trunc(Int, (round(ydim/blocksize)*(blocksize - 1)))
+
+
+function blurriness(image)
+    # Find M and N
+    local   f = fft(image)
+    # local  Fc = fft(shiftOrigin(image))
+    local fc = f # Just taking a chance
+
+    # local  AF = abs(Fc) # Absolute value of centered fourier tranformof image I
+    local af = abs.(fc)
+
+    # local  Mf = max(AF) # Maximum value of frequency component in F
+    local mf = maximum(af)
+
+    # local  TH = getNoOfPixelsAboveTreshold(Mf/1000)
+    local th = length(find(x-> (x > mf/1000), af))
+    # local  measure = TH / (M*N)
+    local (m, n) = size(image)
+    local measure = th / (m * n)
+
+    # Fm = Frequency Domain Image Blur Measure
+    return measure
+end
+
+cview=channelview(imgg)
 for y in 1:blocksize:ylim, x in 1:blocksize:xlim
     # Maybe use  views instead? S2 = view(A, 5, :, 2:6)
-    segment = img[y:y+blocksize, x:x+blocksize]
+    segment = cview[y:y+blocksize, x:x+blocksize]
+    blurriness(segment)
     count = count + 1
 end
 
 print("Number of segments in image  = $count\n")
-
 
 
 # 2.1 Make a sharpness estimator (based on the paper refered to

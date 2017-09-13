@@ -12,12 +12,12 @@
 
 #   equation 1: measure = TH / (M x N)
 
-function blurriness(image)
+Function blurriness(image)
     # Find M and N
     local   F = fft(I)
     local  Fc = fft(shiftOrigin(I))
-    local  AF = abs(Fc)
-    local  Mf = max(AF)
+    local  AF = abs(Fc) # Absolute value of centered fourier tranformof image I
+    local  Mf = max(AF) # Maximum value of frequency component in F
     local  TH = getNoOfPixelsAboveTreshold(Mf/1000)
     local  measure = TH / (M*N)
 end
