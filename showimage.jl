@@ -10,7 +10,9 @@ using Colors
 
 # Test image
 using TestImages
-#img = load("data/scorpion-lapse/scorpion_lapse_1.png")
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_1.png")))
+scorpion12 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_12.png")))
+scorpionstack = (scorpion1, scorpion12)
 #img = testimage("mandrill")
 img=testimage("lena")
 imgg = Gray.(img)
@@ -74,29 +76,38 @@ of that particular pixel. Returns as an array
 function blurrimap(img)
 
     local (ydim, xdim) = size(img)
-    local blocksize=16 # not all numbers works, that's bad.
+    local blocksize=10 # not all numbers works, that's bad.
+
+    #  XXX the offset thing is not getting it right yet.
+    local offset= blocksize
+
     local count=0
     local xlim=trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))
     local ylim=trunc(Int, (round(ydim/blocksize)*(blocksize - 1)))
 
     local cview=channelview(img)
-    local result = Array{Float64}(xlim, ylim)
+    local result = Array{Float64}(ydim, xdim)
     for y in 1:ylim, x in 1:xlim
-        # Maybe use  views instead? S2 = view(A, 5, :, 2:6)
         segment = cview[y:y+blocksize, x:x+blocksize]
-        result[y, x] = blurriness(segment)
+        result[y + offset, x + offset] = blurriness(segment)
         count = count + 1
     end
     print("Number of segments in image  = $count\n")
     return result
 end
 
+function blurrimapstack(images)
+    map(blurrimap, images)
+end
+
+
+
 bmm = blurrimap(imgg)
 
 
 
 # 2.1 Make a sharpness estimator (based on the paper refered to
-#     elsewhere)
+#     elsewhere) (done)
 
 
 # 3. Sharpness stack generation: Make an algorithm that can process a
