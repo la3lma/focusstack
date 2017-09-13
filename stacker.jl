@@ -23,19 +23,46 @@ function stackBasedOnDensity(densityMap, pictureStack)
     #     if it isn't.
     local (noOfImages, ydim, xdim) = size(densityMap)
     # Find the maximal indexes
-    maxindexes = Array{Int}(3,3)
-    maximage = Array{Float64}(3,3)
+    local maxindexes = Array{Int}(ydim,xdim)
+    local maximage = Array{Float64}(ydim,xdim)
+    # XXX Can this be rewritten to be more inherently parallelizable?
     for y in 1:ydim, x in 1:xdim
-        maxindex = findmax(densityMap[y, x,:])[2]
+        maxindex = findmax(densityMap[:, y, x])[2]
         maxindexes[y,x] = maxindex
-        maximage[y,x] = pictureStack[y,x, maxindex]
+        maximage[y,x] = pictureStack[maxindex, y, x]
     end
     return (maximage, maxindexes)
 end
 
-(maximage, maxindexes) = stackBasedOnDensity(testArrays, testArrays)
 
-scorpiondensities = map(blurrimap, scorpionstack)
 
-@time (maxscorpion, maxscorpionindexes) =
-    stackBasedOnDensity(scorpiondensities, scorpionstack)
+function listOfArraysToHigherDimArray(arg)
+    local first = arg[1]
+    local (ydim, xdim) = size(first)
+    local result = Array{Float64}(length(arg), ydim, xdim)
+    local i = 1
+    for a in arg
+        result[i,:,:] = arg[i]
+        i += 1
+    end
+    return result
+end
+
+# Unit test, very simple dataset
+(testmaximage, testmaxmaps) = stackBasedOnDensity(testArrays, testArrays)
+
+# @save and @load could be useful.
+
+## Finding the shape of this thing
+println("Shaking the monkey")
+mandrilstacklist = (mandg, mandg, mandg)
+mandrilstack = reshape([mandg mandg mandg], 3, 512, 512)
+print("blurrimapping")
+mdens = map(blurrimap, mandrilstacklist)
+mandrildensities = listOfArraysToHigherDimArray(mdens)
+print("computing maxmandril")
+(maxmandril, maxmandrilindexes) = stackBasedOnDensity(mandrildensities, mandrilstack)
+
+
+#@time (maxscorpion, maxscorpionindexes) =
+#    stackBasedOnDensity(scorpiondensities, scorpionstack)
