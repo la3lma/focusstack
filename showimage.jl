@@ -8,13 +8,19 @@ using Colors
 # 1. Read an image (could be replaced by one of the
 # sample images)
 
-# Test image
+# Test images
 using TestImages
 scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_1.png")))
 scorpion12 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_12.png")))
 scorpionstack = (scorpion1, scorpion12)
-#img = testimage("mandrill")
-img=testimage("lena")
+mandrilimg= testimage("mandrill")
+lenaimg=testimage("lena")
+
+testimgs = (mandrilimg, lenaimg)
+testarrays = map(x -> channelview(Gray.(x)), testimgs)
+
+img = mandrilimg
+
 imgg = Gray.(img)
 fftimg = fft(channelview(imgg))
 cimg = channelview(imgg)
@@ -75,8 +81,11 @@ of that particular pixel. Returns as an array
 """
 function blurrimap(img)
 
+    ## XXX This thing does not correctly traverse all of the
+    ##     pixels in the correct way so the blurriness estimate
+    ##     is wrong.
     local (ydim, xdim) = size(img)
-    local blocksize=10 # not all numbers works, that's bad.
+    local blocksize=5 # not all numbers works, that's bad.
 
     #  XXX the offset thing is not getting it right yet.
     local offset= blocksize
@@ -100,6 +109,14 @@ function blurrimapstack(images)
     map(blurrimap, images)
 end
 
+
+blurritests = blurrimapstack(testarrays)
+
+# TODO
+# Find the index of the minimum blurriness value for every pixel, put that
+# index in an array.   It will be a "depth" matrix.
+# Then use this array to generate a new image consisting of the least blurry
+# pixel for every position in the image stack.
 
 
 bmm = blurrimap(imgg)
