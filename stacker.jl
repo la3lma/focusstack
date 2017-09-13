@@ -36,7 +36,7 @@ end
 
 
 
-function listOfArraysToHigherDimArray(arg)
+function listOf2DArraysTo3DArray(arg)
     local first = arg[1]
     local (ydim, xdim) = size(first)
     local result = Array{Float64}(length(arg), ydim, xdim)
@@ -59,7 +59,7 @@ mandrilstacklist = (mandg, mandg, mandg)
 mandrilstack = reshape([mandg mandg mandg], 3, 512, 512)
 print("blurrimapping")
 mdens = map(blurrimap, mandrilstacklist)
-mandrildensities = listOfArraysToHigherDimArray(mdens)
+mandrildensities = listOf2DArraysTo3DArray(mdens)
 print("computing maxmandril")
 (maxmandril, maxmandrilindexes) = stackBasedOnDensity(mandrildensities, mandrilstack)
 
