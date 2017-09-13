@@ -24,16 +24,21 @@ testArrays = reshape([testArray1 testArray2 testArray3],
 
 # Find the maximal indexes
 maxindexes = Array{Int}(3,3)
+maximage = Array{Float64}(3,3)
 for y in 1:3, x in 1:3
     maxindex = findmax(testArrays[y, x,:])[2]
     maxindexes[y,x] = maxindex
-    println("y=$y, x= $x, maxindex=$maxindex")
+    # XXX This is cheating, since the testArrays
+    #     will represent the blurriness, but what we
+    #     really want is the pixel from the original
+    #     set of images.  We'll get there though.
+    maximage[y,x] = testArrays[y,x, maxindex]
 end
 
 # Then translate that into an image consisting only of the
 # maximal values.
 
-maximage = Array{Float64}(3,3)
+
 for y in 1:3, x in 1:3
-    maximage[y,x] = testArrays[y,x,maxindexes[y, x]]
+
 end
