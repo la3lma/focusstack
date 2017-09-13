@@ -28,11 +28,6 @@ normfft = 255 .*(zor./maximum(zor))
 #    image (could/should be interpreted as an image to evaluate
 #    reasonableness).  Be able to adjust block size.
 
-(ydim, xdim) = size(img)
-blocksize=2 # not all numbers works, that's bad.
-count=0
-xlim=trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))
-ylim=trunc(Int, (round(ydim/blocksize)*(blocksize - 1)))
 
 """
 Determine the blurriness of a picture using the blurriness
@@ -70,22 +65,34 @@ end
 """
 Apply the blurriness to a neigbourhood around every picture around a pixel in
 the image, and use that estimated blurriness, as an estimate of the blurriness
-of that particular pixel.
+of that particular pixel. Returns as an array
+
+*Example
+
+   tbd
 """
 function blurrimap(img)
 
+    local (ydim, xdim) = size(img)
+    local blocksize=16 # not all numbers works, that's bad.
+    local count=0
+    local xlim=trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))
+    local ylim=trunc(Int, (round(ydim/blocksize)*(blocksize - 1)))
+
+    local cview=channelview(img)
+    local result = Array{Float64}(xlim, ylim)
+    for y in 1:ylim, x in 1:xlim
+        # Maybe use  views instead? S2 = view(A, 5, :, 2:6)
+        segment = cview[y:y+blocksize, x:x+blocksize]
+        result[y, x] = blurriness(segment)
+        count = count + 1
+    end
+    print("Number of segments in image  = $count\n")
+    return result
 end
 
+bmm = blurrimap(imgg)
 
-cview=channelview(imgg)
-for y in 1:blocksize:ylim, x in 1:blocksize:xlim
-    # Maybe use  views instead? S2 = view(A, 5, :, 2:6)
-    segment = cview[y:y+blocksize, x:x+blocksize]
-    blurriness(segment)
-    count = count + 1
-end
-
-print("Number of segments in image  = $count\n")
 
 
 # 2.1 Make a sharpness estimator (based on the paper refered to
