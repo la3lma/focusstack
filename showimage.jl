@@ -34,7 +34,16 @@ count=0
 xlim=trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))
 ylim=trunc(Int, (round(ydim/blocksize)*(blocksize - 1)))
 
+"""
+Determine the blurriness of a picture using the blurriness
+estimator from XXX.  Returns a number between 0 and 1.
+0 means very sharp, 1 means very blurry.
 
+*examples:
+
+     julia> foo = blurriness(channelview(imgg))
+     0.0693817138671875
+"""
 function blurriness(image)
     # Find M and N
     local   f = fft(image)
@@ -56,6 +65,17 @@ function blurriness(image)
     # Fm = Frequency Domain Image Blur Measure
     return measure
 end
+
+
+"""
+Apply the blurriness to a neigbourhood around every picture around a pixel in
+the image, and use that estimated blurriness, as an estimate of the blurriness
+of that particular pixel.
+"""
+function blurrimap(img)
+
+end
+
 
 cview=channelview(imgg)
 for y in 1:blocksize:ylim, x in 1:blocksize:xlim
