@@ -13,32 +13,29 @@ testArray3 =  [0 0 3.1;
                0 0 3.3]
 
 
-# I want to reshape this either into a 3 x 9 array, where the
-# first coordinate is the array, the second is the unrolled index into the
-# 2d array.  Alternatively (preferably?) a 3 x 3 x 3 matrix that
-# we can then make a nice preferably vectorzed mapper for
-
-
 testArrays = reshape([testArray1 testArray2 testArray3],
                      3, 3, 3)
 
-# Find the maximal indexes
-maxindexes = Array{Int}(3,3)
-maximage = Array{Float64}(3,3)
-for y in 1:3, x in 1:3
-    maxindex = findmax(testArrays[y, x,:])[2]
-    maxindexes[y,x] = maxindex
-    # XXX This is cheating, since the testArrays
-    #     will represent the blurriness, but what we
-    #     really want is the pixel from the original
-    #     set of images.  We'll get there though.
-    maximage[y,x] = testArrays[y,x, maxindex]
+function stackBasedOnDensity(densityMap, pictureStack)
+    # XXX We asssume that the dimensions of the two
+    #     parameter arrays are actually identical,
+    #     we should check that, and raise an exception
+    #     if it isn't.
+    local (noOfImages, ydim, xdim) = size(densityMap)
+    # Find the maximal indexes
+    maxindexes = Array{Int}(3,3)
+    maximage = Array{Float64}(3,3)
+    for y in 1:ydim, x in 1:xdim
+        maxindex = findmax(densityMap[y, x,:])[2]
+        maxindexes[y,x] = maxindex
+        maximage[y,x] = pictureStack[y,x, maxindex]
+    end
+    return (maximage, maxindexes)
 end
 
-# Then translate that into an image consisting only of the
-# maximal values.
+(maximage, maxindexes) = stackBasedOnDensity(testArrays, testArrays)
 
+scorpiondensities = map(blurrimap, scorpionstack)
 
-for y in 1:3, x in 1:3
-
-end
+@time (maxscorpion, maxscorpionindexes) =
+    stackBasedOnDensity(scorpiondensities, scorpionstack)

@@ -13,6 +13,7 @@ using TestImages
 scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_1.png")))
 scorpion12 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_12.png")))
 scorpionstack = (scorpion1, scorpion12)
+
 mandrilimg= testimage("mandrill")
 lenaimg=testimage("lena")
 
