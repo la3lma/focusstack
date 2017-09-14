@@ -10,9 +10,23 @@ using Colors
 
 # Test images
 using TestImages
+
+## XXX Should must load the raw images, should also load them directly into
+##     a tuple or an array, using a loop.
 scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_1.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_2.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_3.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_4.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_5.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_6.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_7.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_8.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_7.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_9.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_10.png")))
+scorpion1 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_11.png")))
 scorpion12 = channelview(Gray.(load("data/scorpion-lapse/scorpion_lapse_12.png")))
-scorpionlist = (scorpion1, scorpion12)
+scorpionlist = (scorpion1, scorpion2, scorpion3, scorpion4, scorpion5, scorpion6, scorpion7, scorpion8, scorpion9, scorpion10, scorpion11, scorpion12)
 
 mandrilimg= testimage("mandrill")
 lenaimg=testimage("lena")
