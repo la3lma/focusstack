@@ -167,17 +167,3 @@ println("Mapping scorpion")
 
 
 # @save and @load could be useful.
-
-## Finding the shape of this thing
-# println("Shaking the monkey")
-# mandrilstacklist = (mandg, mandg, mandg)
-# mandrilstack = reshape([mandg mandg mandg], 3, 512, 512)
-# print("blurrimapping")
-# mdens = map(blurrimap, mandrilstacklist)
-# mandrildensities = listOf2DArraysTo3DArray(mdens)
-# print("computing maxmandril")
-# (maxmandril, maxmandrilindexes) = stackBasedOnDensity(mandrildensities, mandrilstack)
-
-
-# imshow(mandril)
-# imshow(maxmandril)
