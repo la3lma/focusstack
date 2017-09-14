@@ -52,15 +52,14 @@ function stackImages(imageList)
     local grayImageList = map( x-> Gray.(x), imageList)
     local grayChannelList = map(channelview, grayImageList)
     local grayStack  = listOf2DArraysTo3DArray(grayChannelList)
+#    local imageStack = listOf2DArraysTo3DArray(imageList)
 
     local blurryGrayList = map(blurrimap, grayChannelList)
     local blurryStack    = listOf2DArraysTo3DArray(blurryGrayList)
 
-    # XXX Using graystack, but I would actually prefer using
-    #     the original pictures
+    # Should use imageStack when grayStack is proven to work
     (maxImage, maxMaps) = stackBasedOnDensity(blurryStack, grayStack)
 
-    imshow(maxImage)
     imshow(maxImage)
 
     return  (maxImage, maxMaps)
@@ -73,6 +72,16 @@ end
 println("Mapping lena")
 lenalist = (lenaimg, lenaimg)
 (lenaMax, lenaMaps) = stackImages(lenalist)
+
+
+
+println("Mapping mandril")
+mandrillist = (mandrilimg, mandrilimg)
+(maxmandril, mandrilmaps) = stackImages(mandrillist)
+
+println("Mapping scorpion")
+(maxScorpion, scorpionMaps) = stackImages(scorpionlist)
+
 
 # @save and @load could be useful.
 
