@@ -22,6 +22,7 @@ function stackBasedOnDensity(densityMap, pictureStack)
     #     we should check that, and raise an exception
     #     if it isn't.
     local (noOfImages, ydim, xdim) = size(densityMap)
+    local (noOfImagesP, ydimP, xdimP) = size(pictureStack)
     # Find the maximal indexes
     local maxindexes = Array{Int}(ydim,xdim)
     local maximage = Array{Float64}(ydim,xdim)
@@ -33,8 +34,6 @@ function stackBasedOnDensity(densityMap, pictureStack)
     end
     return (maximage, maxindexes)
 end
-
-
 
 function listOf2DArraysTo3DArray(arg)
     local first = arg[1]
@@ -48,21 +47,45 @@ function listOf2DArraysTo3DArray(arg)
     return result
 end
 
+
+function stackImages(imageList)
+    local grayImageList = map( x-> Gray.(x), imageList)
+    local grayChannelList = map(channelview, grayImageList)
+    local grayStack  = listOf2DArraysTo3DArray(grayChannelList)
+
+    local blurryGrayList = map(blurrimap, grayChannelList)
+    local blurryStack    = listOf2DArraysTo3DArray(blurryGrayList)
+
+    # XXX Using graystack, but I would actually prefer using
+    #     the original pictures
+    (maxImage, maxMaps) = stackBasedOnDensity(blurryStack, grayStack)
+
+    imshow(maxImage)
+    imshow(maxImage)
+
+    return  (maxImage, maxMaps)
+end
+
+
 # Unit test, very simple dataset
 (testmaximage, testmaxmaps) = stackBasedOnDensity(testArrays, testArrays)
+
+println("Mapping lena")
+lenalist = (lenaimg, lenaimg)
+(lenaMax, lenaMaps) = stackImages(lenalist)
 
 # @save and @load could be useful.
 
 ## Finding the shape of this thing
-println("Shaking the monkey")
-mandrilstacklist = (mandg, mandg, mandg)
-mandrilstack = reshape([mandg mandg mandg], 3, 512, 512)
-print("blurrimapping")
-mdens = map(blurrimap, mandrilstacklist)
-mandrildensities = listOf2DArraysTo3DArray(mdens)
-print("computing maxmandril")
-(maxmandril, maxmandrilindexes) = stackBasedOnDensity(mandrildensities, mandrilstack)
+# println("Shaking the monkey")
+# mandrilstacklist = (mandg, mandg, mandg)
+# mandrilstack = reshape([mandg mandg mandg], 3, 512, 512)
+# print("blurrimapping")
+# mdens = map(blurrimap, mandrilstacklist)
+# mandrildensities = listOf2DArraysTo3DArray(mdens)
+# print("computing maxmandril")
+# (maxmandril, maxmandrilindexes) = stackBasedOnDensity(mandrildensities, mandrilstack)
 
 
-#@time (maxscorpion, maxscorpionindexes) =
-#    stackBasedOnDensity(scorpiondensities, scorpionstack)
+# imshow(mandril)
+# imshow(maxmandril)
