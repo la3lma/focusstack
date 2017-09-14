@@ -50,7 +50,7 @@ function blurrimap(img)
 
     ## XXX This thing does not correctly traverse all of the
     ##     pixels in the correct way so the blurriness estimate
-    ##     is wrong.
+    ##     is wrong (but still usable)
     local (ydim, xdim) = size(img)
     local blocksize=5 # not all numbers works, that's bad.
 
@@ -109,7 +109,10 @@ function stackImages(imageList)
     local grayImageList = map( x-> Gray.(x), imageList)
     local grayChannelList = map(channelview, grayImageList)
     local grayStack  = listOf2DArraysTo3DArray(grayChannelList)
-#    local imageStack = listOf2DArraysTo3DArray(imageList)
+
+    # XXX I want to use proper images, but this doesn't work
+    #     yet. Keeping this dead code as a challenge to myself :-)
+    #    local imageStack = listOf2DArraysTo3DArray(imageList)
 
     local blurryGrayList = map(blurrimap, grayChannelList)
     local blurryStack    = listOf2DArraysTo3DArray(blurryGrayList)
