@@ -20,9 +20,9 @@ library, and on a set of microscopic pictures in a series called
 "scorpion-lapse", which is a series of pictures of a "house
 pseudoscorpion" (Chelifer cancroides) that I captured in my home :)
 
-All of the software here will be open sourced, either Apache 2 or
-GPL 3. Haven't really decieded yet.  The time series is Apache 2 licensed
-(by me, I took the pictures).
+All of the software here will be open sourced using the Apache 2
+license. The image series is Apache 2 licensed (by me, I took the
+pictures).
 
 
 [1] "Image Sharpness Measure for Blurred Images in Frequency" by
