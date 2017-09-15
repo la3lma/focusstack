@@ -87,6 +87,8 @@ function blurrimap(img)
     local cview=channelview(img)
     local result = Array{Float64}(ydim, xdim)
     for y in 1:ylim, x in 1:xlim
+        # XXX BUG:  The block shouldn't start in the corner of the
+        #           segment, it should have x,y  in its center!!!
         segment = cview[y:y+blocksize, x:x+blocksize]
         result[y + offset, x + offset] = blurriness(segment)
         count = count + 1
