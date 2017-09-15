@@ -152,5 +152,5 @@ function stackImages(imageList)
 
     imshow(maxImage)
 
-    return  (maxImage, maxMaps)
+    return  (maxImage, maxMaps, blurryGrayList)
 end

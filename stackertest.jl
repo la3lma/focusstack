@@ -28,16 +28,16 @@ testArrays = reshape([testArray1 testArray2 testArray3],
 
 println("Mapping lena")
 lenalist = (lenaimg, lenaimg)
-(lenaMax, lenaMaps) = stackImages(lenalist)
+(lenaMax, lenaMaps, lenaBlurryMap) = stackImages(lenalist)
 
 
 
 println("Mapping mandril")
 mandrillist = (mandrilimg, mandrilimg)
-(maxmandril, mandrilmaps) = stackImages(mandrillist)
+(maxmandril, mandrilmaps, mandrilBlurryMap) = stackImages(mandrillist)
 
 println("Mapping scorpion")
-(maxScorpion, scorpionMaps) = stackImages(scorpionlist)
+(maxScorpion, scorpionMaps, scorpionBlurryMap) = stackImages(scorpionlist)
 
-
+# jusing JLD
 # @save and @load could be useful.
