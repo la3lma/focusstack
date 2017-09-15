@@ -49,7 +49,24 @@ Tried octave, too hard. Tried julia, wouldn't load my images.  Waited two years,
 
 * Use the blurriness mapp to make a 3D density map of the object being imaged (a bombination of thresholding and "Marching Cubes" I presume.
 
-* Make a 3D model of the object that can be displayed in a browser with OpenGL and/or be printed by a 3D printer.
+* Make a 3D model of the object that can be displayed in a browser
+with OpenGL and/or be printed by a 3D printer.
+
+# Current TODO
+
+* Look at the blurriness maps.  There are some bugs there, they should
+be removed (centering of blocks).
+* Look at the distribution of blurrinesses in  an image.   Apply some
+  statistics techniques.
+* Think about making a smaller subset of the scorpion stack that
+   can be used for development work (e.g. a 50x50   slice through the
+   stack.
+*  Read files in a more efficient manner (less
+   conversions/duplications).
+*  See if the process can more clearly be described as a map/reduce
+process.
+* Think about setting up an automatically generated experiment to
+  compare various algorithm parameters.
 
 
 ## More references on how to do focus stacking
