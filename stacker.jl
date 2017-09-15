@@ -71,11 +71,14 @@ of that particular pixel. Returns as an array
 """
 function blurrimap(img)
 
+
     ## XXX This thing does not correctly traverse all of the
     ##     pixels in the correct way so the blurriness estimate
     ##     is wrong (but still usable)
     local (ydim, xdim) = size(img)
     local blocksize = 5 # not all numbers works, that's bad.
+
+    println("Running blurrimap on ($ydim, $xdim) picture with blocksize = $blocksize")
 
     #  XXX the offset thing is not getting it right yet.
     local offset = blocksize
@@ -140,17 +143,11 @@ function stackImages(imageList)
     local grayChannelList = map(channelview, grayImageList)
     local grayStack  = listOf2DArraysTo3DArray(grayChannelList)
 
-    # XXX I want to use proper images, but this doesn't work
-    #     yet. Keeping this dead code as a challenge to myself :-)
-    #    local imageStack = listOf2DArraysTo3DArray(imageList)
-
     local blurryGrayList = map(blurrimap, grayChannelList)
     local blurryStack    = listOf2DArraysTo3DArray(blurryGrayList)
 
-    # Should use imageStack when grayStack is proven to work
     (maxImage, maxMaps) = stackBasedOnDensity(blurryStack, grayStack)
-
-    imshow(maxImage)
-
     return  (maxImage, maxMaps, blurryGrayList)
 end
+
+# imshow(maxImage)

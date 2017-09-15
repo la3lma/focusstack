@@ -37,7 +37,7 @@ mandrillist = (mandrilimg, mandrilimg)
 (maxmandril, mandrilmaps, mandrilBlurryMap) = stackImages(mandrillist)
 
 println("Mapping scorpion")
-(maxScorpion, scorpionMaps, scorpionBlurryMap) = stackImages(scorpionlist)
+(maxscorpion, scorpionMaps, scorpionBlurryMap) = stackImages(scorpionlist)
 
 # jusing JLD
 # @save and @load could be useful.

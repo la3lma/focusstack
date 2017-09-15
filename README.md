@@ -56,6 +56,13 @@ with OpenGL and/or be printed by a 3D printer.
 
 * Look at the blurriness maps.  There are some bugs there, they should
 be removed (centering of blocks).
+* Rewrite processing code to  store intermediate values on file
+when processing a batch (e.g. blurriness matrixes), and
+read from file rather than compute if values are available there.
+This is a good idea since it now takes a very long time to
+run through a dataset even when a minor change is done, since a large
+amount of calculations needs to be done again, since they are stores
+inside the runtime environment and nowhere else.
 * Look at the distribution of blurrinesses in  an image.   Apply some
   statistics techniques.
 * Think about making a smaller subset of the scorpion stack that
