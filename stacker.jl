@@ -16,6 +16,10 @@
 # under the License.
 
 
+using ImageView
+using Images
+using FileIO
+using Colors
 
 
 ##
@@ -92,6 +96,10 @@ function blurrimap(img)
 end
 
 
+"""
+Based on a density map 3D array,  and a stack of pictures,
+produce a focus-stacked composite picture.
+"""
 function stackBasedOnDensity(densityMap, pictureStack)
     # XXX We asssume that the dimensions of the two
     #     parameter arrays are actually identical,
@@ -123,7 +131,11 @@ function listOf2DArraysTo3DArray(arg)
     return result
 end
 
-
+"""
+Using a list of images, produce a pair consisting of
+a stacked image, and an image describing which original
+picture has been used to produce a particular pixel.
+"""
 function stackImages(imageList)
     local grayImageList = map( x-> Gray.(x), imageList)
     local grayChannelList = map(channelview, grayImageList)
