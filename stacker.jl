@@ -101,16 +101,12 @@ Based on a density map 3D array,  and a stack of pictures,
 produce a focus-stacked composite picture.
 """
 function stackBasedOnDensity(densityMap, pictureStack)
-    # XXX We asssume that the dimensions of the two
-    #     parameter arrays are actually identical,
-    #     we should check that, and raise an exception
-    #     if it isn't.
     local (noOfImages, ydim, xdim) = size(densityMap)
     local (noOfImagesP, ydimP, xdimP) = size(pictureStack)
-    # Find the maximal indexes
+
     local maxindexes = Array{Int}(ydim,xdim)
     local maximage = Array{Float64}(ydim,xdim)
-    # XXX Can this be rewritten to be more inherently parallelizable?
+
     for y in 1:ydim, x in 1:xdim
         maxindex = findmax(densityMap[:, y, x])[2]
         maxindexes[y,x] = maxindex
