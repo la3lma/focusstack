@@ -75,16 +75,16 @@ function blurrimap(img)
     ##     pixels in the correct way so the blurriness estimate
     ##     is wrong (but still usable)
     local (ydim, xdim) = size(img)
-    local blocksize=5 # not all numbers works, that's bad.
+    local blocksize = 5 # not all numbers works, that's bad.
 
     #  XXX the offset thing is not getting it right yet.
-    local offset= blocksize
+    local offset = blocksize
 
     local count=0
-    local xlim=trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))
-    local ylim=trunc(Int, (round(ydim/blocksize)*(blocksize - 1)))
+    local xlim = trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))
+    local ylim = trunc(Int, (round(ydim/blocksize)*(blocksize - 1)))
 
-    local cview=channelview(img)
+    local cview = channelview(img)
     local result = Array{Float64}(ydim, xdim)
     for y in 1:ylim, x in 1:xlim
         # XXX BUG:  The block shouldn't start in the corner of the
