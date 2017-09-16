@@ -146,7 +146,7 @@ function stackImages(imageList)
     local blurryGrayList = map(blurrimap, grayChannelList)
     local blurryStack    = listOf2DArraysTo3DArray(blurryGrayList)
 
-    (maxImage, maxMaps) = stackBasedOnDensity(blurryStack, grayStack)
+    local (maxImage, maxMaps) = stackBasedOnDensity(blurryStack, grayStack)
     return  (maxImage, maxMaps, blurryGrayList)
 end
 
