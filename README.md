@@ -24,6 +24,7 @@ Cancroides)](https://en.wikipedia.org/wiki/Chelifer_cancroides) that I
 captured in my home :)
 
 ![Chelifer Cancroides](bokskorpion.jpg "Chelifer Cancroides (photo by Morten Rudlang).")
+(photo by Morten Rudlang)
 
 All of the software here will be open sourced using the Apache 2
 license. The image series is Apache 2 licensed (by me, I took the
