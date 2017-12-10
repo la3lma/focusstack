@@ -67,10 +67,9 @@ However, there is another interesting feature from the processing.  The selectio
 
 * Better runtime efficiency.   Less copying, and also perhaps use some FFT hacks to avoid running on FFT of a neigbourhood per pixel.
 
-* Use the blurriness mapp to make a 3D density map of the object being imaged (a bombination of thresholding and "Marching Cubes" I presume.
+* Use the blurriness map to make a 3D density map of the object being imaged (a combination of thresholding and "Marching Cubes" I presume.
 
-* Make a 3D model of the object that can be displayed in a browser
-with OpenGL and/or be printed by a 3D printer.
+* Make a 3D model of the object that can be displayed in a browser with OpenGL and/or be printed by a 3D printer.
 
 # Current TODO
 
