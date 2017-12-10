@@ -43,15 +43,14 @@ function blurriness(image)
     # local  Fc = fft(shiftOrigin(image))
     local fc = f # Just taking a chance
 
-    # local  AF = abs(Fc) # Absolute value of centered fourier tranformof image I
+    # local  AF = abs(Fc) # Absolute value of centered fourier tranform of image.
     local af = abs.(fc)
 
-    # local  Mf = max(AF) # Maximum value of frequency component in F
+    # local  Mf = max(AF) # Maximum value of frequency component in f
     local mf = maximum(af)
 
-    # local  TH = getNoOfPixelsAboveTreshold(Mf/1000)
     local th = length(find(x-> (x > mf/1000), af))
-    # local  measure = TH / (M*N)
+
     local (m, n) = size(image)
     local measure = th / (m * n)
 
@@ -80,8 +79,8 @@ function blurrimap(img)
 
     println("Running blurrimap on ($ydim, $xdim) picture with blocksize = $blocksize")
 
-    #  XXX the offset thing is not getting it right yet.
     local offset = blocksize
+    # XXX Shouldn't this be blocksize/2  (rounded)?
 
     local count=0
     local xlim = trunc(Int, (round(xdim/blocksize)*(blocksize - 1)))

@@ -19,12 +19,15 @@ it as best as I could without testing that all my assumptions are correct).
 Have tested the algorithm on test images from Julia's image processing
 library, and on a set of microscopic pictures in a series called
 "scorpion-lapse", which is a series of pictures of a "house
-pseudoscorpion" (Chelifer Cancroides) that I captured in my home :)
+pseudoscorpion" ((Chelifer
+Cancroides)](https://en.wikipedia.org/wiki/Chelifer_cancroides) that I
+captured in my home :)
+
+![Chelifer Cancroides](bokskorpion.jpg "Chelifer Cancroides (photo by Morten Rudlang).")
 
 All of the software here will be open sourced using the Apache 2
 license. The image series is Apache 2 licensed (by me, I took the
 pictures).
-
 
 
 # The basic idea (as far as I can tell)
@@ -40,7 +43,13 @@ pictures).
 
 # How I got there.
 
-Tried octave, too hard. Tried julia, wouldn't load my images.  Waited two years, downloaded https://juliacomputing.com/ juliapro 0.6, and that just worked right out of the box.   Googled "blurriness estimation" (+ variations and permutations), found [1], implemented it.  Fiddled around to get some pictures through the pipeline  to verify that it actually does something reasonable, and now it does.
+Tried octave, too hard. Looked at Python, what a mess :-) Tried julia,
+wouldn't load my images.  Waited two years, downloaded
+https://juliacomputing.com/ juliapro 0.6, and that just worked right
+out of the box.  Googled "blurriness estimation" (+ variations and
+permutations), found [1], implemented it.  Fiddled around to get some
+pictures through the pipeline to verify that it actually does
+something reasonable, and now it does.
 
 # Where it is today
 

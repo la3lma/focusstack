@@ -1,4 +1,4 @@
-# Time everything, make a file that logs benchmarks
+
 # of various kinds, and also makes plots that allows
 # those plots to be examined in some useful way.
 # The thing to plot is timing (possibly with variations)
@@ -12,5 +12,6 @@
 #       instruments code (look at the @time macro for
 #       inspiration), then make something that will be able
 #       to run the tests.
-
-# tic() toc()
+#
+# tic() toc() @timed @time @timev @timeit
+# https://www.juliabloggers.com/timing-in-julia/# Time everything, make a file that logs benchmarks
