@@ -3,14 +3,14 @@
 This is an experiment in focus staking
 
 
-It started by me not knowing very much about the subject, except that it
-exists.  I do have a microscope though, and it has a nice camera (a
-raspberry pi camera in a 3D mounted adapter) mounted on it, so it can take  tme series of
-pictures.  If I move the focal plane up and down I will get pictures
-that are sharp in some parts and blurred in others.  The idea of focus
-stacking is to pick out the parts that are sharpest from all of the
-pictures in the series and combine them into a picture that is sharper
-than any of the original pictures.
+It started by me not knowing very much about the subject, except that
+it exists.  I do have a microscope though, and it has a nice camera (a
+raspberry pi camera in a 3D printed adapter) mounted on it, so it can
+take tme series of pictures.  If I move the focal plane up and down I
+will get pictures that are sharp in some parts and blurred in others.
+The idea of focus stacking is to pick out the parts that are sharpest
+from all of the pictures in the series and combine them into a picture
+that is sharper than any of the original pictures.
 
 Eventually wrote some code in Julia.   Found a blurriness estimator in
 [1] and implemented that (I think, just read the paper and implemented
@@ -53,6 +53,11 @@ Tried octave, too hard. Tried julia, wouldn't load my images.  Waited two years,
 with OpenGL and/or be printed by a 3D printer.
 
 # Current TODO
+
+* Introduce proper unit tests, using an unit test library of some sort.
+* Introduce a set of performance tests that will time tests (unit or
+  otherwise), log the results in an appropriate manner (e.g. json
+  files) and plot the time evolution of timings.
 
 * Look at the blurriness maps.  There are some bugs there, they should
 be removed (centering of blocks).
