@@ -48,9 +48,19 @@ Some stacking is happening :-)
 
 ![A stacked book scorpion](exampleStackedPicture.jpg "A stacked book scorpion")
 
+So, some things to note about this picture:
 
-exampleStackedPicture.jpg
+* It's not that sharp, this is probably because it's based on only 12 input pictures, none of which are very sharp :-)
+* It is in fact _Much_ sharper than any of the input pictures
+* There are small "bubble"-like artefacts that happens when the selector algorithm for some reason selects a pixel from another plane right inside a region where that doesn't make much sense.
+* There is a bug that stops the selection algorighm from being applied to the bottom 1/5 or so of the picture
 
+All of these item represents bugs that should/could be addressed.
+
+However, there is another interesting feature from the processing.  The selection map, i.e. the map showing which image is the sharpest, is interesting in itself.   It represents a kind of "depth map", that could easily be interpreted as a 3D surface model of the object being studied.    So, given small enough slices/focus planes, the microscope could easily be used as a 3D scanner for microscopic object.  Cool!
+
+
+![Selection map](exampleDepthMap.jpg "The image plane selection map, can also be interpreted as a 3D height map.")
 
 
 # Some possible future directions
