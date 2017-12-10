@@ -44,7 +44,7 @@ Tried octave, too hard. Tried julia, wouldn't load my images.  Waited two years,
 
 # Where it is today
 
-Some stacking is happening :-)   
+Some stacking is happening :-)
 
 ![A stacked book scorpion](exampleStackedPicture.jpg "A stacked book scorpion")
 
@@ -93,12 +93,14 @@ inside the runtime environment and nowhere else.
 * Make a much quicker blurriness estimator. Currently we're working on
   a 5x5 estimator that uses FFTs and whatnot to estimate blurriness.
   Question: Can that highly nonlinear implementation be approximated
-  by a convolution over the original image.  Because i it can, then we
-  can use the "fft hack" F^{-1}(F(g)+F(h)) wher g is the original
-  image, h is the convolution kernel, F is the FFT operator, and
-  F^{-1} is the inverse FFT operator. Since this operation has O(n*log(n))
-  an FFTs are pretty optimised, this could be very quick.  It's a fun
-  experiment to do.
+  by a convolution over the original image.  Because if it can, then
+  we can use the "fft hack" F^{-1}(F(g)+F(h)) where g is the original
+  image, h is the convolution kernel and "+" is matrix addition (with
+  centers being centers, and the smallest matrix having its edges
+  added by zeros), F is the FFT operator, and F^{-1} is the inverse
+  FFT operator. Since this operation has O(n*log(n)) an FFTs are
+  pretty optimised, this could be very quick.  It's a fun experiment
+  to do.
 
 
 * Think about making a smaller subset of the scorpion stack that
