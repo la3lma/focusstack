@@ -42,6 +42,16 @@ pictures).
 
 Tried octave, too hard. Tried julia, wouldn't load my images.  Waited two years, downloaded https://juliacomputing.com/ juliapro 0.6, and that just worked right out of the box.   Googled "blurriness estimation" (+ variations and permutations), found [1], implemented it.  Fiddled around to get some pictures through the pipeline  to verify that it actually does something reasonable, and now it does.
 
+# Where it is today
+
+Some stacking is happening :-)   
+
+![A stacked book scorpion](exampleStackedPicture.jpg "A stacked book scorpion")
+
+
+exampleStackedPicture.jpg
+
+
 
 # Some possible future directions
 
